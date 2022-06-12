@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 mt-5">
+      <label for="search">Search </label><br />
+      <input
+        type="text"
+        class="float-start"
+        [(ngModel)]="searchValue"
+        (ngModelChange)="search(searchValue)"
+      />
+      <div class="float-end">
+        <button class="btn btn-sm btn-success" (click)="addNewGame()">
+          Add New Game
+        </button>
+      </div>
+    </div>
+
+    <div class="col-md-12 mt-5">
+      <p *ngIf="!games" class="text-center">no records found</p>
+      <div *ngIf="games && searchedGames.length < 1" class="d-flex flex-wrap">
+        <div *ngFor="let game of games; let i = index" class="me-2">
+          <div class="card" style="width: 18rem">
+            <img
+              class="card-img-top"
+              src="{{ game.imageBase64 }}"
+              alt="Card image cap"
+              height="300"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Game Name : {{ game.gameName }}</h5>
+              <p class="card-text">Bundle : {{ game.bundle }}</p>
+              <p class="card-text">Owner : {{ game.owner }}</p>
+              <button class="btn btn-success" (click)="deleteGame(i)">
+                Delete Game
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="searchedGames">
+        <div *ngFor="let game of searchedGames; let i = index" class="me-2">
+          <div class="card" style="width: 18rem">
+            <img
+              class="card-img-top"
+              src="{{ game.imageBase64 }}"
+              alt="Card image cap"
+              height="300"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Game Name : {{ game.gameName }}</h5>
+              <p class="card-text">Bundle : {{ game.bundle }}</p>
+              <p class="card-text">Owner : {{ game.owner }}</p>
+              <button class="btn btn-success" (click)="deleteGame(i)">
+                Delete Game
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,78 @@
+<form
+  [formGroup]="gameForm"
+  (ngSubmit)="addGame(gameNameInput.value, bundleInput.value, ownerInput.value)"
+>
+  <div class="col-md-6 mx-auto text-center">
+    <div class="form-group">
+      <input
+        type="text"
+        class="form-control"
+        [ngClass]="{
+          'border border-danger text-danger':
+            gameForm.get('gameName').invalid && gameForm.get('gameName').touched
+        }"
+        formControlName="gameName"
+        placeholder="Game Name"
+        #gameNameInput
+      />
+    </div>
+    <span
+      class="error"
+      *ngIf="
+        gameForm.get('gameName').invalid && gameForm.get('gameName').touched
+      "
+      >Invalid Game Name</span
+    >
+    <div class="form-group">
+      <input
+        type="text"
+        class="form-control"
+        [ngClass]="{
+          'border border-danger text-danger':
+            gameForm.get('bundle').invalid && gameForm.get('bundle').touched
+        }"
+        formControlName="bundle"
+        placeholder="Bundle"
+        #bundleInput
+      />
+    </div>
+    <span
+      class="error"
+      *ngIf="gameForm.get('bundle').invalid && gameForm.get('bundle').touched"
+      >Invalid Bundle</span
+    >
+    <div class="form-group">
+      <input
+        type="email"
+        class="form-control"
+        [ngClass]="{
+          'border border-danger text-danger':
+            gameForm.get('owner').invalid && gameForm.get('owner').touched
+        }"
+        formControlName="owner"
+        placeholder="Owner"
+        #ownerInput
+      />
+    </div>
+    <span
+      class="error"
+      *ngIf="gameForm.get('owner').invalid && gameForm.get('owner').touched"
+      >Invalid Owner</span
+    >
+
+    <input
+      type="file"
+      formControlName="image"
+      class="form-control"
+      accept="image/png, image/jpeg"
+      (change)="file($event)"
+    />
+    <button
+      type="submit"
+      [disabled]="gameForm.invalid"
+      class="btn btn-primary mt-5"
+    >
+      Submit
+    </button>
+  </div>
+</form>
